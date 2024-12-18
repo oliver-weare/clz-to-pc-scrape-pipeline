@@ -1,5 +1,7 @@
-import requests, re
+import requests
 from bs4 import BeautifulSoup
+
+from .utils import get_match
 
 
 class SalesData:
@@ -43,7 +45,7 @@ class SalesData:
                         grade_pricing[grade] = "no data"
                         continue
 
-                    digits_only = self.get_number_only(price_string)
+                    digits_only = get_match(r"\d+\.\d+", price_string)
 
                     grade_pricing[grade] = round(float(digits_only) * exchange_rate, 2)
 
@@ -66,8 +68,3 @@ class SalesData:
 
     def get_clean_price(self, price):
         return price.replace("$", "").replace("-", "")
-
-    def get_number_only(self, string):
-        match = re.search(r"\d+\.\d+", string)
-        result = match.group(0)
-        return result

@@ -1,5 +1,7 @@
-import requests, re
+import requests
 from bs4 import BeautifulSoup
+
+from .utils import get_match
 
 
 def get_exchange_rate_url():
@@ -17,6 +19,5 @@ def scrape_exchange_rate():
 
         if p_tag:
             p_tag_text = p_tag.get_text()
-            match = re.search(r"\d+\.\d+", p_tag_text)
-            result = float(match.group(0))
+            result = float(get_match(r"\d+\.\d+", p_tag_text))
             return round(result, 2)

@@ -1,7 +1,10 @@
 from lib.files import delete_file_if_exists, get_csv_data, write_csv_file
+
 from lib.comic import Comic
 from lib.sales import SalesData
+
 from lib.paths import INPUT_FILE_PATH, OUTPUT_FILE_PATH
+
 from lib.rate import scrape_exchange_rate
 
 file_data = get_csv_data(INPUT_FILE_PATH)
